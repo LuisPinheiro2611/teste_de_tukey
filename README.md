@@ -14,4 +14,4 @@ Este script realiza análise estatística (ANOVA e Teste de Tukey) com dados de 
    |---------|--------|-------------|----------|
 2. Rode o script:
    '''bash
-   python teste_de_tukey.py
+   python teste_de_tukey.py'''
