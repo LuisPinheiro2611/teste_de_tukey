@@ -33,15 +33,12 @@ print(df.head())
 # Criar uma lista contendo as variáveis a serem analisadas no teste
 lista_variaveis = [coluna for coluna in df.columns if coluna not in ['Parcela', 'Blocos', 'Tratamentos']]
 
-# DataFrame com as médias das parcelas
-df_media = df.groupby(['Parcela', 'Blocos', 'Tratamentos'])[lista_variaveis].mean().reset_index()
-
 # Realiza-se então a ANOVA e o teste de Tukey para cada variável
 for variavel in lista_variaveis:
     print(f'{variavel}'.center(50, '-'))
 
     # Criar modelo
-    modelo = ols(f'{variavel} ~ C(Tratamentos) + C(Blocos)', df_media).fit()
+    modelo = ols(f'{variavel} ~ C(Tratamentos) + C(Blocos)', df).fit()
 
     # Realizar a ANOVA
     tabela = sm.stats.anova_lm(modelo)
@@ -57,7 +54,7 @@ for variavel in lista_variaveis:
         print('Rejeita-se H0, há alguma diferença entre as médias')
 
     # Teste de Tukey
-    tukey = pairwise_tukeyhsd(groups=df_media['Tratamentos'], endog=df_media[variavel], alpha=0.05)
+    tukey = pairwise_tukeyhsd(groups=df['Tratamentos'], endog=df[variavel], alpha=0.05)
     print(tukey)
 
     # Gráficos
