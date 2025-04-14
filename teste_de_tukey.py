@@ -31,7 +31,7 @@ except FileNotFoundError:
 print(df.head())
 
 # Criar uma lista contendo as variáveis a serem analisadas no teste
-lista_variaveis = [coluna for coluna in df.columns if coluna not in ['Parcela', 'Blocos', 'Tratamentos', 'Pontos']]
+lista_variaveis = [coluna for coluna in df.columns if coluna not in ['Parcela', 'Blocos', 'Tratamentos']]
 
 # DataFrame com as médias das parcelas
 df_media = df.groupby(['Parcela', 'Blocos', 'Tratamentos'])[lista_variaveis].mean().reset_index()
